@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CategoryList" representedClassName="CategoryList" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categorylisttoOutfit" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Outfit" inverseName="outfittoCategorylist" inverseEntity="Outfit" syncable="YES"/>
+        <relationship name="categorylisttoReguser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RegisteredUser" inverseName="regusertoCategorylist" inverseEntity="RegisteredUser" syncable="YES"/>
+    </entity>
+    <entity name="Outfit" representedClassName="Outfit" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="outfittoCategorylist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryList" inverseName="categorylisttoOutfit" inverseEntity="CategoryList" syncable="YES"/>
+        <relationship name="outfittoReguser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RegisteredUser" inverseName="regusertoOutfit" inverseEntity="RegisteredUser" syncable="YES"/>
+    </entity>
+    <entity name="RegisteredUser" representedClassName="RegisteredUser" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="regusertoCategorylist" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryList" inverseName="categorylisttoReguser" inverseEntity="CategoryList" syncable="YES"/>
+        <relationship name="regusertoOutfit" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Outfit" inverseName="outfittoReguser" inverseEntity="Outfit" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CategoryList" positionX="-272" positionY="-3573" width="128" height="103"/>
+        <element name="Outfit" positionX="-324" positionY="-3346" width="128" height="148"/>
+        <element name="RegisteredUser" positionX="-594" positionY="-3483" width="128" height="148"/>
+    </elements>
 </model>

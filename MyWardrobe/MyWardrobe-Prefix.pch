@@ -14,4 +14,10 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
+    #import "AppDelegate.h"
+    #import "RegisteredUser.h"
+    #import "Outfit.h"
+    #import "CategoryList.h"
+    #import "UIImageView+AFNetworking.h"
+    #import "CommonFunction.h"
 #endif

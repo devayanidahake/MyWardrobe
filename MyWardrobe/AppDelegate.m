@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @implementation AppDelegate
 
@@ -18,11 +19,31 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    LoginViewController *loginView=[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    self.window.rootViewController =loginView;
+//    NSCalendar *cal=[[NSCalendar alloc]init];
+//    NSDateComponents *dateComp=[[NSDateComponents alloc]init];
+//    [dateComp setDay:22];
+//    [dateComp setMonth:01];
+//    [dateComp setYear:2014];
+//    [dateComp setHour:10];
+//    [dateComp setMinute:44];
+//    [dateComp setSecond:0];
+//    NSDate *date=[cal dateFromComponents:dateComp];
+//    UILocalNotification *locNotif=[[UILocalNotification alloc]init];
+//    locNotif.fireDate=date;
+//    locNotif.alertBody=@"alert";
+//    locNotif.alertAction=@"action";
+//    [[UIApplication sharedApplication]scheduleLocalNotification:locNotif];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
-
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIAlertView *alertv=[[UIAlertView alloc]initWithTitle:nil message:@"alert" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    [alertv show];
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
