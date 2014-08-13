@@ -15,7 +15,11 @@
 
 {
     CategoryList* categoryObj;
+    IBOutlet BCMenuView *outfitView;
+    IBOutlet SlideMenuView *categoryView;
 }
+@property (nonatomic,retain) NSString * catType;
 //@property (nonatomic,retain)CategoryList* categoryObj;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withFrame:(CGRect)_rect;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withFrame:(CGRect)_rect withCatArray:(NSArray*)categoryArray;
+
 @end

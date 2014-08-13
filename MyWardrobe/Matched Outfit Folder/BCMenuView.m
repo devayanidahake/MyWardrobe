@@ -45,7 +45,7 @@
     
     
     
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake((self.bounds.size.width/2)-(self.sizeOfMenuItem/2), 0, self.sizeOfMenuItem, self.bounds.size.width )];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake((self.bounds.size.width/2)-(self.sizeOfMenuItem/2), 0, self.sizeOfMenuItem, self.bounds.size.height )];
     scrollView.pagingEnabled = YES;
     scrollView.clipsToBounds = NO;
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -55,16 +55,17 @@
     currentIndex = 0;
     CGRect lastRect = CGRectMake(2.5, 0, sizeOfMenuItem-5, self.bounds.size.height);
     int i = 0;
-    for(NSString * menuName in menuItems)
+    for(Outfit * outfit in menuItems)
     {
-        UIButton * btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         //[btn setTitle:menuName forState:UIControlStateNormal];
         
         ///
         // for Images in Bundle
-        [btn setImage:[UIImage imageNamed:[self.menuItems objectAtIndex:i]] forState:UIControlStateNormal];
-        
+              // [btn setImage:[UIImage imageWithContentsOfFile:outfit.image] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:outfit.image]] forState:UIControlStateNormal];
+         [btn setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:outfit.image]] forState:UIControlStateSelected];
         
         ///
         // for Images in Doc dir

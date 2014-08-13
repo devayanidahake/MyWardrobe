@@ -12,7 +12,7 @@
 @synthesize menuItems;
 @synthesize delegate;
 
-- (id)init
+- (id)initWithMenuItems:(NSArray*)categoryArray
 {
     self = [super init];
     if (self) {
@@ -21,13 +21,10 @@
         menuTable = [[UITableView alloc]init];
         menuTable.delegate = self;
         menuTable.dataSource = self;
-        
-        UIView * bgV = [[UIView alloc]init];
-        bgV.backgroundColor = [UIColor blackColor];
-        menuTable.backgroundView = bgV;
+        menuItems = categoryArray;
         
         
-        menuTable.backgroundColor = [UIColor clearColor];
+        menuTable.backgroundColor = [UIColor blackColor];
         [self addSubview:menuTable];
         
         isVisible = NO;
@@ -38,6 +35,7 @@
     }
     return self;
 }
+
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     
@@ -58,20 +56,13 @@
     
 }
 
-
-
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-
-    
     menuTable.frame = CGRectMake(0, 0, self.bounds.size.width - 10, self.bounds.size.height);
     
     
 }
-
-
-
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -91,7 +82,9 @@
         cell.textLabel.font = [UIFont fontWithName:@"Arial" size:11.0];
         cell.textLabel.textColor = [UIColor whiteColor];
     }
-    cell.textLabel.text = [self.menuItems objectAtIndex:indexPath.row];
+    CategoryList *category = (CategoryList*)[self.menuItems objectAtIndex:indexPath.row];
+    cell.textLabel.text = category.name;
+    cell.backgroundColor =[UIColor clearColor];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,11 +94,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(self.delegate)
     {
        if ([self.delegate respondsToSelector:@selector(slideMenuView:DidSelectMenu:)])
        {
            [self.delegate slideMenuView:self DidSelectMenu:[self.menuItems objectAtIndex:indexPath.row]];
+           isVisible = NO;
            [self.delegate slideMenuViewDoHide:self];
        }
         

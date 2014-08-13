@@ -13,7 +13,7 @@
 
 @protocol SlideMenuViewDelegate <NSObject>
 
-- (void)slideMenuView:(SlideMenuView*)menuView DidSelectMenu:(NSString*)menuTitle;
+- (void)slideMenuView:(SlideMenuView*)menuView DidSelectMenu:(CategoryList*)selectedCategory;
 - (void)slideMenuViewDoShow:(SlideMenuView*)slideMenuView;
 - (void)slideMenuViewDoHide:(SlideMenuView*)slideMenuView;
 
@@ -33,4 +33,5 @@
 @property(nonatomic,retain) NSArray * menuItems;
 @property(nonatomic,assign) id < SlideMenuViewDelegate > delegate;
 
+- (id)initWithMenuItems:(NSArray*)categoryArray;
 @end

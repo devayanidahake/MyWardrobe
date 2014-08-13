@@ -93,7 +93,6 @@
         Outfit *objOutfit = (Outfit*)[arr_outfit objectAtIndex:indexPath.row];
         if (objOutfit)
         {
-           
             imgView_outfit=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.contentView.frame.size.width, cell.contentView.frame.size.height)];
             [imgView_outfit setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:objOutfit.image]]];
             imgView_outfit.opaque = YES;

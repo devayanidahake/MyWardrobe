@@ -45,14 +45,32 @@
             [v removeFromSuperview];
         }
     }
-    float x=0,y=0;
+    
+    int y=0;
+    int  i=1;
+    NSMutableArray *result =[[NSMutableArray alloc]init];
+    
     RegisteredUser *currentUser = [DatabaseManager getCurrentUser];
+    NSString *str = [NSString stringWithFormat:@"%d",i++];
+
     for (CategoryList *category in currentUser.regusertoCategorylist) {
-        CustomMatchedOutfitViewViewController *customViewObj = [[CustomMatchedOutfitViewViewController alloc]initWithNibName:@"CustomMatchedOutfitViewViewController" bundle:nil withFrame:CGRectMake(x, y, scrollView.frame.size.width, 350)];
-        y+=350;
+        if ([category.type isEqualToString:str]) {
+            [result addObject:category];
+        }
+    }
+    if (result && [result count]>0) {
+        CustomMatchedOutfitViewViewController *customViewObj = [[CustomMatchedOutfitViewViewController alloc]initWithNibName:@"CustomMatchedOutfitViewViewController" bundle:nil withFrame:CGRectMake(0, y, scrollView.frame.size.width, 150) withCatArray:result];
         [scrollView addSubview:customViewObj.view];
         [arrCustomMatchedViews addObject:customViewObj];
+
     }
+//    for (CategoryList *category in currentUser.regusertoCategorylist) {
+//        
+//        CustomMatchedOutfitViewViewController *customViewObj = [[CustomMatchedOutfitViewViewController alloc]initWithNibName:@"CustomMatchedOutfitViewViewController" bundle:nil withFrame:CGRectMake(x, y, scrollView.frame.size.width, 350) withCatType:[NSString stringWithFormat:@"%d",i++]];
+//        y+=350;
+//        [scrollView addSubview:customViewObj.view];
+//        [arrCustomMatchedViews addObject:customViewObj];
+//    }
     
    // [scrollView addSubview:<#(UIView *)#>]
 }
