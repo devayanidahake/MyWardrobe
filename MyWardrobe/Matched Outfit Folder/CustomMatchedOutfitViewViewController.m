@@ -36,7 +36,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-   // RegisteredUser *user = [DatabaseManager getCurrentUser];
     
     arrOutfit= [[NSMutableArray alloc]init];
     for (Outfit *outfitObj in [[arrCaterory objectAtIndex:0] categorylisttoOutfit])
@@ -69,6 +68,7 @@
     
 }
 
+//Ask delegate which category has been selected from category menu
 -(void)slideMenuView:(SlideMenuView *)menuView DidSelectMenu:(CategoryList *)selectedCategory
 {
     for (CategoryList *catObj in arrCaterory) {
@@ -89,7 +89,7 @@
 {
     [UIView animateWithDuration:0.3 animations:^(){
         CGRect rect = slideMenuView.frame;
-        rect.origin.x = - 90;
+        rect.origin.x = -90;
         slideMenuView.frame = rect;
     }];
     
