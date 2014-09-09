@@ -53,8 +53,10 @@
         [appDelegate.managedObjectContext save:&error];
         if (!error) {
             NSLog(@"registrationiscompleted-%@",obj_ResisterdUser);
+            
         }
         error =nil;
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else
     {

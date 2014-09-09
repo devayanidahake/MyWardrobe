@@ -102,7 +102,6 @@
         rect.origin.x = 0;
         slideMenuView.frame = rect;
     }];
-
 }
 
 @end

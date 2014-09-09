@@ -163,11 +163,11 @@
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    NSInteger count = [arr_categoryList count];
-    if(self.editing)
-        count++;
-    return count;
-    //return [arr_categoryList count];
+//    NSInteger count = [arr_categoryList count];
+//    if(self.editing)
+//        count++;
+//    return count;
+    return [arr_categoryList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -206,15 +206,8 @@
 }
 -(void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
-//    [super setEditing:editing animated:animated];
-//    [self.tableView setEditing:editing animated:YES];
-//    if (editing) {
-//        
-//    }
-//    else{
-//        
-//    }
 }
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle) editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
@@ -236,14 +229,18 @@
                     
                     if ([DatabaseManager removeCategory:obj_cat forUser:currentUser])
                     {
+                        [tableView beginUpdates];
+                        [arr_categoryList removeObject:obj_cat];
+                        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        [tableView endUpdates];
                         break;
                     }
                     
                 }
             }
             
-            [arr_categoryList removeObject:obj_cat];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            
         }
 
     }
@@ -326,28 +323,56 @@
 //    }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 20.0;
+    return 40.0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIButton*addBtn=[UIButton buttonWithType:UIButtonTypeContactAdd];
-    addBtn.frame =CGRectMake(40, 0, 30, 30);
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.frame.size.height)];
+    view.backgroundColor = [UIColor whiteColor];
+    UIButton *addBtn=[UIButton buttonWithType:UIButtonTypeContactAdd];
+    addBtn.frame =CGRectMake(10, 5, 30 , 30);
     [addBtn addTarget:self action:@selector(editButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    return addBtn;
+    [view addSubview:addBtn];
+    UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(50, 5, 140, 30)];
+    lable.text = @"Add new category";
+    [lable setTextAlignment:NSTextAlignmentLeft];
+    lable.textColor = [UIColor blackColor];
+    [view addSubview:lable];
+    return view;
 }
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    //    NSString *stringToMove = [self.reorderingRows objectAtIndex:sourceIndexPath.row];
+    //    [self.reorderingRows removeObjectAtIndex:sourceIndexPath.row];
+    //    [self.reorderingRows insertObject:stringToMove atIndex:destinationIndexPath.row];
 }
 
-
+//- (NSIndexPath *)tableView:(UITableView *)tableView
+//targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+//       toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+//    NSDictionary *section = [data objectAtIndex:sourceIndexPath.section];
+//    NSUInteger sectionCount = [[section valueForKey:@"content"] count];
+//    if (sourceIndexPath.section != proposedDestinationIndexPath.section) {
+//        NSUInteger rowInSourceSection =
+//        (sourceIndexPath.section > proposedDestinationIndexPath.section) ?
+//        0 : sectionCount - 1;
+//        return [NSIndexPath indexPathForRow:rowInSourceSection inSection:sourceIndexPath.section];
+//    } else if (proposedDestinationIndexPath.row >= sectionCount) {
+//        return [NSIndexPath indexPathForRow:sectionCount - 1 inSection:sourceIndexPath.section];
+//    }
+//    // Allow the proposed destination.
+//    return proposedDestinationIndexPath;
+//}
 
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
+//    if (indexPath.row == 0) // Don't move the first row
+//        return NO;
     return YES;
 }
 
@@ -366,7 +391,5 @@
     // Push the view controller.
     [self.navigationController pushViewController:obj_outfitGridView animated:YES];
 }
- 
-
 
 @end

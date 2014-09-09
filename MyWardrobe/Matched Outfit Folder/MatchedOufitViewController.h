@@ -12,7 +12,7 @@
 #import "CustomMatchedOutfitViewViewController.h"
 #import "DatabaseManager.h"
 
-@interface MatchedOufitViewController : UIViewController<BCMenuViewDelegate,SlideMenuViewDelegate>
+@interface MatchedOufitViewController : UIViewController<BCMenuViewDelegate,SlideMenuViewDelegate,UIActionSheetDelegate>
 {
     BCMenuView  * menu1;
     SlideMenuView * subMenu1;
@@ -23,6 +23,9 @@
     BCMenuView  * menu2;
     SlideMenuView * subMenu2;
     IBOutlet UIScrollView *scrollView;
+    IBOutlet UIView *viewCategorySelection;
 }
+- (IBAction)okBtnClicked:(id)sender;
+- (IBAction)btnCategorySelectionClicked:(id)sender;
 
 @end
