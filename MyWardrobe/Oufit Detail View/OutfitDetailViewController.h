@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OutfitDetailViewController : UIViewController
+@interface OutfitDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
     
     IBOutlet UIImageView *imgViewOutfit;
@@ -16,6 +16,7 @@
     IBOutlet UILabel *lblPrice;
     IBOutlet UILabel *lblDate;
     IBOutlet UILabel *lblDiscription;
+    IBOutlet UITableView *tableViewOutfitDetail;
 }
 @property(nonatomic,retain)Outfit *outfit;
 @end

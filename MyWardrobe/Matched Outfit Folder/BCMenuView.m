@@ -53,7 +53,13 @@
     scrollView.backgroundColor = [UIColor clearColor];
     scrollView.contentSize = CGSizeMake(scrollView.bounds.size.width*self.menuItems.count, self.bounds.size.height);
     currentIndex = 0;
+    
     CGRect lastRect = CGRectMake(2.5, 0, sizeOfMenuItem-5, self.bounds.size.height);
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(lastRect.origin.x + self.sizeOfMenuItem/2.0 +10.0  , 0, self.sizeOfMenuItem-5, self.bounds.size.height)];
+    view.layer.borderColor = [UIColor redColor].CGColor;
+    view.layer.borderWidth = 2;
+    [self addSubview:view];
+    
     int i = 0;
     for(Outfit * outfit in menuItems)
     {
@@ -64,9 +70,10 @@
         ///
         // for Images in Bundle
               // [btn setImage:[UIImage imageWithContentsOfFile:outfit.image] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:outfit.image]] forState:UIControlStateNormal];
+         [btn setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:outfit.image]] forState:UIControlStateNormal];
          [btn setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:outfit.image]] forState:UIControlStateSelected];
         
+        //btn.backgroundColor = [UIColor yellowColor];
         ///
         // for Images in Doc dir
         //[btn setImage:[UIImage imageWithContentsOfFile:[self.menuItems objectAtIndex:i]] forState:UIControlStateNormal];
@@ -81,8 +88,14 @@
         [scrollView addSubview:btn];
         
     }
+    if (menuItems && [menuItems count]==0) {
+        UILabel *lableNoData = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
+        lableNoData.text = @"No data available";
+        [self.scrollView addSubview:lableNoData];
+    }
     
     [self addSubview:scrollView];
+    [self bringSubviewToFront:view];
     
     
 }

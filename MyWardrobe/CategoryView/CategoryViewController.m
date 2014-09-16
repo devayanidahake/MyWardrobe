@@ -332,13 +332,18 @@
     view.backgroundColor = [UIColor whiteColor];
     UIButton *addBtn=[UIButton buttonWithType:UIButtonTypeContactAdd];
     addBtn.frame =CGRectMake(10, 5, 30 , 30);
-    [addBtn addTarget:self action:@selector(editButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    addBtn.userInteractionEnabled = NO;
+    //[addBtn addTarget:self action:@selector(editButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:addBtn];
     UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(50, 5, 140, 30)];
     lable.text = @"Add new category";
     [lable setTextAlignment:NSTextAlignmentLeft];
     lable.textColor = [UIColor blackColor];
     [view addSubview:lable];
+    UIButton *btnFooter = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnFooter.frame = CGRectMake(0, 0, tableView.frame.size.width, tableView.frame.size.height);
+    [btnFooter addTarget:self action:@selector(editButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:btnFooter];
     return view;
 }
 

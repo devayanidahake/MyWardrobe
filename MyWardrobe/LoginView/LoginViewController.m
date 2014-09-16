@@ -51,25 +51,34 @@
 
 - (IBAction)btn_LoginClicked:(id)sender
 {
-    NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"RegisteredUser"];
-    NSPredicate *predicate =[NSPredicate predicateWithFormat:@"username =%@ and password =%@",txt_username.text,txt_password.text];
-    [request setPredicate:predicate];
-    NSError *error;
-    RegisteredUser *regUser = [[appDelegate.managedObjectContext executeFetchRequest:request error:&error] lastObject];
-    
-    if (!error && regUser)
+    if (![txt_username.text isEqualToString:@""] && ![txt_password.text isEqualToString:@""])
     {
-         NSLog(@"user data==%@",regUser.username);
-        CategoryViewController *obj_categoryView =[[CategoryViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        obj_categoryView.view.frame=self.view.frame;
-        UINavigationController *obj_navigationController =[[UINavigationController alloc]initWithRootViewController:obj_categoryView];
-        [self presentViewController:obj_navigationController animated:YES completion:nil];
-        [[NSUserDefaults standardUserDefaults]setValue:regUser.username forKey:@"currentUser"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSFetchRequest *request =[[NSFetchRequest alloc]initWithEntityName:@"RegisteredUser"];
+        NSPredicate *predicate =[NSPredicate predicateWithFormat:@"username =%@ and password =%@",txt_username.text,txt_password.text];
+        [request setPredicate:predicate];
+        NSError *error;
+        RegisteredUser *regUser = [[appDelegate.managedObjectContext executeFetchRequest:request error:&error] lastObject];
+        
+        if (!error && regUser)
+        {
+            NSLog(@"user data==%@",regUser.username);
+            CategoryViewController *obj_categoryView =[[CategoryViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            obj_categoryView.view.frame=self.view.frame;
+            UINavigationController *obj_navigationController =[[UINavigationController alloc]initWithRootViewController:obj_categoryView];
+            [self presentViewController:obj_navigationController animated:YES completion:nil];
+            [[NSUserDefaults standardUserDefaults]setValue:regUser.username forKey:@"currentUser"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        else
+        {
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Hey" message:@"Please Enter valid Username or Password." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
     }
     else
     {
-//        UIAlertView *alert=[[UIAlertView alloc] ];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alert" message:@"Field is empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
     
 }

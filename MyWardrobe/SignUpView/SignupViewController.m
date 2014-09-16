@@ -81,16 +81,67 @@
         [txt_password becomeFirstResponder];
     }
     if (textField == txt_password) {
-        [txt_gender becomeFirstResponder];
+        [txt_password resignFirstResponder];
     }
-    if (textField == txt_gender) {
-        [txt_age becomeFirstResponder];
+//    if (textField == txt_gender) {
+//        [txt_age becomeFirstResponder];
+//    }
+//    if (textField == txt_age) {
+//        [txt_age resignFirstResponder
+//         ];
+//    }
+    return YES;
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == txt_gender)
+    {
+        [txt_name resignFirstResponder];
+        [txt_username resignFirstResponder];
+        [txt_password resignFirstResponder];
+        
+        UIActionSheet *action = [[UIActionSheet alloc]initWithTitle:@"Select Option:" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+        NSArray *arrayGender = [NSArray arrayWithObjects:@"Male",@"Female",nil];
+        for (NSString *str in arrayGender) {
+            [action addButtonWithTitle:str];
+        }
+        action.tag = txt_gender.tag;
+        [action setCancelButtonIndex:[action addButtonWithTitle:@"Cancel"]];
+        [action showInView:self.view];
+        return NO;
+        
     }
-    if (textField == txt_age) {
-        [txt_age resignFirstResponder
-         ];
+    else if (textField == txt_age)
+    {
+        
+        [txt_name resignFirstResponder];
+        [txt_username resignFirstResponder];
+        [txt_password resignFirstResponder];
+        UIActionSheet *action = [[UIActionSheet alloc]initWithTitle:@"Select Option:" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+        action.tag = txt_age.tag;
+        for (int i=10 ; i<100 ; i++) {
+            [action addButtonWithTitle:[NSString stringWithFormat:@"%d",i]];
+        }
+        
+        [action setCancelButtonIndex:[action addButtonWithTitle:@"Cancel"]];
+        [action showInView:self.view];
+        return NO;
     }
     return YES;
+}
+
+#pragma - actionsheet delegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (!(buttonIndex == actionSheet.cancelButtonIndex))
+    {
+        UITextField *txtField;
+        txtField = (UITextField *)[self.view viewWithTag:actionSheet.tag];
+        NSString *str = [actionSheet buttonTitleAtIndex:buttonIndex] ;
+        [txtField setText:str];
+        
+    }
 }
 
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RegisteredUser.h"
 
-@interface SignupViewController : UIViewController<UITextFieldDelegate>
+@interface SignupViewController : UIViewController<UITextFieldDelegate,UIActionSheetDelegate>
 {
     __weak IBOutlet UITextField *txt_name;
     __weak IBOutlet UITextField *txt_username;

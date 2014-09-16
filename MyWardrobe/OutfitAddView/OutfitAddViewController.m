@@ -50,10 +50,10 @@
         [price_Outfit becomeFirstResponder];
     }
     if (textField == price_Outfit) {
-        [date_Outfit resignFirstResponder];
+        [price_Outfit resignFirstResponder];
     }
     if (textField == date_Outfit) {
-        [discription_Outfit becomeFirstResponder];
+        [date_Outfit resignFirstResponder];
     }
     if (textField == discription_Outfit) {
         [discription_Outfit resignFirstResponder];

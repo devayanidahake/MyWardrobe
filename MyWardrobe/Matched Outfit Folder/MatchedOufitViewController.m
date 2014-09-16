@@ -31,7 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     arrCustomMatchedViews =[[NSMutableArray alloc]init];
-    
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(btnSaveClicked:)];
+    [self.navigationItem setRightBarButtonItem:saveButton];
 
     
 }
@@ -106,6 +107,10 @@
         arrVisableCategoryList =[[NSMutableArray alloc]initWithObjects:topCategory,middleCategory,bottomCategory, nil];
         [self prepareViewForCategoriesAndOutfits];
     }
+}
+-(void)btnSaveClicked:(id)sender
+{
+    
 }
 
 - (IBAction)btnCategorySelectionClicked:(id)sender {
